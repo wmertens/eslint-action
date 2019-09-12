@@ -1,7 +1,2 @@
 #!/bin/sh
-
-set -e
-
-npm install
-
-NODE_PATH=node_modules node /action/lib/run.js
+NODE_PATH=node_modules exec node /action/lib/run.js
