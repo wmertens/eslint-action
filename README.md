@@ -6,18 +6,21 @@ This is a GitHub Action that runs ESLint for `.js`, `.jsx`, and `.tsx` files usi
 
 Neat! Bet your CI doesn't do that.
 
+You can pass files and extensions with the `with` property on the job. They will be split on commas.
+
 ## Usage
 
-`.github/main.workflow`:
+`.github/workflows/nodejs.yml`:
 
-```hcl
-workflow "Pull Request" {
-  on = "pull_request"
-  resolves = ["ESLint"]
-}
-
-action "ESLint" {
-  uses = "hallee/eslint-action@master"
-  secrets = ["GITHUB_TOKEN"]
-}
+```yaml
+# ...
+  steps:
+    # ...
+    - name: eslint
+      if: always()
+      uses: wmertens/eslint-action@master
+      with:
+        files: "src,lib,plugins"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
